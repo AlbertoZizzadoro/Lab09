@@ -17,7 +17,7 @@ class RegioneDAO:
             return None
 
         cursor = cnx.cursor(dictionary=True)
-        query = """ ADD YOUR QUERY """ # TODO
+        query = """ SElECT * FROM regione """ # TODO
         try:
             cursor.execute(query)
             for row in cursor:

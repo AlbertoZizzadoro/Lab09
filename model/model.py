@@ -1,3 +1,5 @@
+import self
+
 from database.regione_DAO import RegioneDAO
 from database.tour_DAO import TourDAO
 from database.attrazione_DAO import AttrazioneDAO
@@ -12,6 +14,8 @@ class Model:
         self._costo = 0
 
         # TODO: Aggiungere eventuali altri attributi
+
+
 
         # Caricamento
         self.load_tour()
@@ -40,6 +44,14 @@ class Model:
         """
 
         # TODO
+    lista_relazioni = TourDAO.get_tour_attrazioni()
+    for coppia in lista_relazioni:
+        self.tour_map[coppia["id_tour"]].attrazioni.add(self.attrazioni_map[coppia["id_attrazione"]])
+        self.attrazioni_map[coppia["id_attrazione"]].tour.add(self.tour_map[coppia["id_tour"]])
+
+        print(self.tour_map[coppia["id_tour"]].attrazioni)
+        print(self.attrazioni_map[coppia["id_attrazione"]].tour)
+
 
     def genera_pacchetto(self, id_regione: str, max_giorni: int = None, max_budget: float = None):
         """
@@ -64,3 +76,5 @@ class Model:
         """ Algoritmo di ricorsione che deve trovare il pacchetto che massimizza il valore culturale"""
 
         # TODO: è possibile cambiare i parametri formali della funzione se ritenuto opportuno
+c=Model()
+c.load_relazioni()
